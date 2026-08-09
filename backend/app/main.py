@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
-
+from .routers import audio  
 app = FastAPI(
     title="Fluento API",
     description="AI Speaking Coach Backend",
