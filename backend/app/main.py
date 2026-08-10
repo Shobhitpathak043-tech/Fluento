@@ -26,3 +26,24 @@ def root():
 @app.get("/health")
 def health():
     return {"status": "ok", "db": "connected"}
+
+from pydantic import BaseModel
+
+class TextRequest(BaseModel):
+    text: str
+    language: str = "en"
+
+@app.post("/api/analyze")
+def analyze_text(req: TextRequest):
+    # simple emotion detection for now
+    emotion = "neutral"
+    if "sad" in req.text.lower(): emotion = "sad"
+    if "anxious" in req.text.lower() or "stress" in req.text.lower(): emotion = "anxious"
+    if "happy" in req.text.lower() or "great" in req.text.lower(): emotion = "happy"
+    
+    return {
+        "emotion": emotion,
+        "confidence": 0.85,
+        "advice": "Take a deep breath. You got this 💙",
+        "text_received": req.text
+    }
