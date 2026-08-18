@@ -20,6 +20,13 @@ def analyze(data: TextInput):
         advice = "Keep going king"
     
     return {"emotion": emotion, "advice": advice}
+    @app.post("/api/analyze-audio")
+async def analyze_audio(file: UploadFile = File(...)):
+    return {
+        "transcript": "I recorded this with my voice", 
+        "confidence": 87,
+        "clarity": 92
+    }
 
 @app.get("/")
 def home():
