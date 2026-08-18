@@ -27,7 +27,7 @@ async def analyze_audio(file: UploadFile = File(...)):
     
         return {
             "transcript": "I recorded this with my voice",
-            "confidence": 0.87,
+            "confidence": 87,
             "clarity": 92
         }
 
