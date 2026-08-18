@@ -8,15 +8,11 @@ class TextInput(BaseModel):
     text: str
 
 
-# ==========================================
-# AUDIO ANALYSIS
-# ==========================================
-
 @app.post("/api/analyze-audio")
 async def analyze_audio(file: UploadFile = File(...)):
 
     try:
-        # Read the uploaded audio
+    
         audio_data = await file.read()
 
         print("Audio received:", file.filename)
@@ -28,7 +24,7 @@ async def analyze_audio(file: UploadFile = File(...)):
                 "error": "The audio file is empty."
             }
 
-        # Demo response for now
+    
         return {
             "transcript": "I recorded this with my voice",
             "confidence": 0.87,
@@ -42,11 +38,6 @@ async def analyze_audio(file: UploadFile = File(...)):
         return {
             "error": str(e)
         }
-
-
-# ==========================================
-# TEXT EMOTION ANALYSIS
-# ==========================================
 
 @app.post("/api/analyze")
 def analyze(data: TextInput):
@@ -75,10 +66,6 @@ def analyze(data: TextInput):
         "confidence": 0.85
     }
 
-
-# ==========================================
-# HOME
-# ==========================================
 
 @app.get("/")
 def home():
