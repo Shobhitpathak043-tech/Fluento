@@ -1,6 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
-from fastapi import UploadFile,File
 
 app = FastAPI(title="Fluente Lite")
 
