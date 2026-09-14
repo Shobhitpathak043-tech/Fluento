@@ -40,32 +40,30 @@ async def analyze_audio(file: UploadFile = File(...)):
         }
 
 @app.post("/api/analyze")
-def analyze(data: TextInput):
-
-    text = data.text.lower()
-
-    if "stressed" in text or "tension" in text:
-        emotion = "anxious"
-        advice = "Take a deep breath. You got this 💙"
-
-    elif "sad" in text:
-        emotion = "sad"
-        advice = "Talk to someone you trust. 1 day at a time."
-
-    elif "happy" in text or "good" in text:
-        emotion = "happy"
-        advice = "Keep going! You're doing great."
-
+def get_emotion(text):
+    text = text.lower()
+    if "sad" in text or "depressed" in text or "lonely" in text:
+        return "sad"
+    elif "angry" in text or "mad" in text or "frustrated" in text:
+        return "angry"
+    elif "stress" in text or "anxiety" in text or "tensed" in text:
+        return "stressed"
+    elif "happy" in text or "good" in text or "great" in text:
+        return "happy"
     else:
-        emotion = "okay"
-        advice = "Keep going king."
+        return "neutral"
 
-    return {
-        "emotion": emotion,
-        "advice": advice,
-        "confidence": 0.85
-    }
-
+def get_advice(emotion):
+    if emotion == "sad":
+        return "It's okay to feel sad. Talk to a friend you trust and write down 1 good thing that happened today 💙"
+    elif emotion == "angry":
+        return "Anger is valid. Take 10 deep breaths, go for a 5 min walk, don't reply right now."
+    elif emotion == "stressed":
+        return "Stress is heavy. Make 1 page notes, do 3 deep breaths, tackle one small task."
+    elif emotion == "happy":
+        return "Love that energy! Save this feeling, share it with someone today."
+    else:
+        return "Thanks for sharing. Take a deep breath, you got this 💙"
 
 @app.get("/")
 def home():
