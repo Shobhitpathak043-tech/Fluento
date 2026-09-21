@@ -44,8 +44,8 @@ async def analyze_audio(file: UploadFile = File(...)):
             "emotion": emotion,
             "feeling": emotion,
             "advice": get_advice(emotion),
-            "confidence": 87,
-            "clarity": 92,
+            "confidence": 47,
+            "clarity": 62,
             "transcript": "I recorded this with my voice"
         }
     except Exception as e:
@@ -57,7 +57,7 @@ def analyze_text(input: TextInput):
     return {
         "emotion": emotion,
         "advice": get_advice(emotion),
-        "confidence": 85
+        "confidence": 77
     }
 
 @app.get("/")
