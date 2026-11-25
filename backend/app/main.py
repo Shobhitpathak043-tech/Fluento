@@ -1,9 +1,16 @@
 from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
-
-app = FastAPI(title="Fluente Lite")
 from fastapi.middleware.cors import CORSMiddleware
 
+
+app = FastAPI(title="Fluente Lite")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class TextInput(BaseModel):
     text: str
 
